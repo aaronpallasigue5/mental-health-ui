@@ -9,7 +9,7 @@
         <input 
           id="name"
           v-model.trim="name" 
-          placeholder="e.g. Alex" 
+          placeholder="e.g. Aaron" 
           class="input-field"
           :disabled="loading"
         />
@@ -29,7 +29,7 @@
       
       <div class="button-group">
         <button @click="submitMood" :disabled="loading || !isValid" class="submit-btn">
-          <span v-if="loading" class="loader"></span>
+          <span v-if="loading" class="spinner"></span>
           {{ loading ? 'Consulting AI...' : 'Analyze Mood' }}
         </button>
         
@@ -67,9 +67,9 @@ export default {
     };
   },
   computed: {
-    // Prevents empty submissions
+    // FIXED: Now only requires 1 character to enable the button
     isValid() {
-      return this.name.length > 0 && this.mood.length > 5;
+      return this.name.trim().length > 0 && this.mood.trim().length > 0;
     }
   },
   methods: {
@@ -88,7 +88,8 @@ export default {
         
         this.aiMessage = res.data.ai_message; 
       } catch (err) {
-        this.errorMessage = "⚠️ Connection Failed. Ensure your Node.js backend is running on Port 3000.";
+        // This error appears if your backend isn't reachable
+        this.errorMessage = "⚠️ Connection Failed. Ensure your backend is running.";
         console.error("API Error:", err);
       } finally {
         this.loading = false;
@@ -154,11 +155,27 @@ export default {
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.1s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .submit-btn:hover:not(:disabled) { background: #3aa876; transform: translateY(-1px); }
-.submit-btn:active:not(:disabled) { transform: translateY(0); }
 .submit-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
 .reset-btn {
   flex: 1;
@@ -189,7 +206,6 @@ export default {
   font-weight: 500;
 }
 
-/* Animations */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.5s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
