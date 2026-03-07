@@ -7,6 +7,8 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // ADD THIS LINE: This matches your GitHub repository name
+  base: '/mental-health-ui/', 
   plugins: [
     vue(),
     vueJsx(),
