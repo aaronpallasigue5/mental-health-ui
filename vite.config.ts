@@ -7,7 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // ADD THIS LINE: This matches your GitHub repository name
+  // Ensure this matches your GitHub repo name exactly
   base: '/mental-health-ui/', 
   plugins: [
     vue(),
@@ -19,4 +19,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  // Adding build options to ensure clean output for GitHub Pages
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+  }
 })
