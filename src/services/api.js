@@ -1,5 +1,6 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://127.0.0.1:3000'
+  // This is your specific live backend URL from Render
+  baseURL: 'https://backend-4auy.onrender.com' 
 });
