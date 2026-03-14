@@ -68,19 +68,17 @@ export default {
         return;
       }
       try {
-        // Iniba sa /mood para mag-match sa backend route
         await api.post("/mood", {
           full_name: this.name,
           mood_text: this.mood
         });
-        
         this.name = "";
         this.mood = "";
         this.errorMessage = "";
-        this.loadMoods(); 
+        this.loadMoods();
       } catch (err) {
         console.error(err);
-        this.errorMessage = "Error submitting mood. Check backend connection.";
+        this.errorMessage = "Error submitting mood.";
       }
     },
     async loadMoods() {
@@ -89,7 +87,7 @@ export default {
         this.moods = res.data;
       } catch (err) {
         console.error(err);
-        this.errorMessage = "Error loading moods from database.";
+        this.errorMessage = "Error loading moods.";
       }
     }
   },
@@ -100,27 +98,8 @@ export default {
 </script>
 
 <style scoped>
-/* Paste mo rito lahat ng original styles mo sa taas. 
-   Nagdagdag lang ako ng design para sa AI reply box: */
-.ai-reply {
-  background: #f0f2f5;
-  padding: 10px;
-  border-radius: 8px;
-  margin-top: 10px;
-  font-size: 14px;
-  border-left: 4px solid #1877f2;
-  color: #050505;
-}
 .fb-body { background-color: #f0f2f5; min-height: 100vh; padding: 20px; font-family: Helvetica, Arial, sans-serif; }
 .fb-container { max-width: 500px; margin: 0 auto; }
 .fb-card { background: white; border-radius: 8px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); margin-bottom: 16px; padding: 12px 16px; }
 .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-.avatar { width: 40px; height: 40px; background: #1877f2; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-.avatar.small { width: 36px; height: 36px; font-size: 14px; }
-.placeholder-text { color: #65676b; font-size: 17px; }
-.fb-input-name { width: 100%; border: 1px solid #dddfe2; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; font-size: 14px; box-sizing: border-box; }
-.fb-textarea { width: 100%; border: 1px solid #dddfe2; border-radius: 6px; padding: 12px; font-size: 15px; min-height: 80px; resize: none; box-sizing: border-box; }
-.fb-post-btn { width: 100%; background-color: #1877f2; color: white; border: none; border-radius: 6px; padding: 8px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 10px; }
-.fb-post-btn:hover { background-color: #166fe5; }
-.feed-title { font-size: 18px; color: #65676b; margin: 20px 0 10px 5px; }
-.feed-
+.avatar { width:
